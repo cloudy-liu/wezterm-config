@@ -1,0 +1,15 @@
+# Editor / OS
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Lua compiled
+*.luac
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
