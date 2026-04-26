@@ -1,115 +1,115 @@
 # 🐱 WezTerm Config
-[中文](./README.md) | [English](./README_EN.md)
+[中文](./README_CN.md)
 
 ![Demo](./demo.png)
 
-一个开箱即用的 [WezTerm](https://wezfurlong.org/wezterm/) 终端配置，专为 Windows 用户打造。
+An out-of-the-box [WezTerm](https://wezfurlong.org/wezterm/) terminal configuration, built for Windows users.
 
-从 Tabby 转过来？这个配置已经帮你把最常用的习惯都对齐了。
+Coming from Tabby? This config already aligns your most-used habits.
 
 ---
 
-## 😫 解决了什么问题
+## 😫 What Problems Does It Solve?
 
-WezTerm 默认配置在很多地方对 Windows 用户不太友好，这个配置逐一修掉了这些痛点：
+WezTerm's default configuration isn't very Windows-friendly. This config fixes these pain points one by one:
 
-| 问题 | 这个配置怎么做 |
-|------|---------------|
-| 粘贴到远端 vim/git commit 会出现隔行空行 | 自动将 CRLF 转为 LF |
-| 中文显示乱码或回退到难看的字体 | 6 级字体回退链，中英文都有合适字形 |
-| AI 工具（Cursor Thinking 等）的暗淡文字太细看不清 | Half-intensity 文本用 OneDark 注释灰显示，不用 ExtraLight 字重 |
-| 关窗口每次都要确认 | 关闭窗口确认弹窗已关闭 |
-| 没有右键粘贴 | 右键粘贴，和 Tabby 一样 |
-| Ctrl+C 要么只复制要么只中断，不能兼得 | 有选中 → 复制 + 显示"已复制"提示；没选中 → 发送 Ctrl+C 中断 |
-| 分屏操作没有顺手快捷键 | 对齐 Windows Terminal：Alt+方向键导航、Alt+Shift+方向键调整大小 |
-| Tab 不能重命名 | Ctrl+B 或 Ctrl+Shift+R 重命名 |
-| 管理员模式 Tab 标题带"管理员:"前缀，太长 | 自动去除 |
-| 标题栏占空间 | 无系统标题栏，集成按钮在 Tab 栏右侧 |
-| 缺字弹窗烦人 | 关闭缺字警告 |
-| 绿色太暗或太亮 | ANSI 绿色调为翡翠绿，不刺眼也不看不清 |
+| Problem | How This Config Fixes It |
+|---------|--------------------------|
+| Pasting into remote vim/git commit produces double-spaced lines | Automatically converts CRLF to LF |
+| CJK characters show garbled or fall back to ugly fonts | 6-level font fallback chain for both CJK and Latin |
+| AI tool dim text (e.g. Cursor Thinking) is too thin to read | Half-intensity text uses OneDark comment gray instead of ExtraLight weight |
+| Closing a window always triggers a confirmation dialog | Window close confirmation disabled |
+| No right-click paste | Right-click to paste, just like Tabby |
+| Ctrl+C can only copy OR interrupt, not both | With selection → copy + "Copied" toast; without → send Ctrl+C interrupt |
+| No convenient shortcuts for pane splits | Aligned with Windows Terminal: Alt+Arrow to navigate, Alt+Shift+Arrow to resize |
+| Can't rename tabs | Ctrl+B or Ctrl+Shift+R to rename |
+| Admin mode tab titles have long "Administrator:" prefix | Automatically stripped |
+| Title bar wastes space | No system title bar, integrated buttons in tab bar |
+| Missing glyph popups are annoying | Missing glyph warnings disabled |
+| ANSI green too dark or too bright | Tuned to emerald green — readable without eye strain |
 
-## ✨ 功能一览
+## ✨ Features
 
-- **配色** — 自定义 `Tabby-JetBrains-Darcula` 暗色主题
-- **字体** — Source Code Pro → JetBrains Mono → Consolas → Microsoft YaHei → Segoe UI Symbol → Noto Sans Symbols 2
-- **智能 Ctrl+C** — 选中时复制 + 状态栏"已复制"提示（2 秒后消失），未选中时发送中断
-- **右键粘贴** — 和 Tabby 一样
-- **分屏** — 对齐 Windows Terminal 快捷键（创建/导航/调整/关闭）
-- **Tab 管理** — 重命名、移动、标题居中、去除管理员前缀
-- **无边框标题栏** — 集成最小化/最大化/关闭按钮
-- **CRLF → LF 粘贴修正** — 远端 shell 不再隔行
-- **光标不闪烁** — SteadyBar 样式，减少视觉干扰
-- **滚动条** — 默认开启，方便拖拽浏览历史输出
+- **Color scheme** — Custom `Tabby-JetBrains-Darcula` dark theme
+- **Fonts** — Source Code Pro → JetBrains Mono → Consolas → Microsoft YaHei → Segoe UI Symbol → Noto Sans Symbols 2
+- **Smart Ctrl+C** — Copy when text is selected (with "Copied" toast for 2s), send interrupt when nothing is selected
+- **Right-click paste** — Just like Tabby
+- **Pane splits** — Windows Terminal-style shortcuts (create/navigate/resize/close)
+- **Tab management** — Rename, move, centered titles, admin prefix stripped
+- **Borderless title bar** — Integrated min/max/close buttons
+- **CRLF → LF paste fix** — No more double-spacing in remote shells
+- **Non-blinking cursor** — SteadyBar style, less visual noise
+- **Scrollbar** — Enabled by default for easy scrollback browsing
 
-## ⌨️ 快捷键
+## ⌨️ Key Bindings
 
-### 🏷️ Tab 管理
+### 🏷️ Tab Management
 
-| 快捷键 | 功能 |
-|--------|------|
-| `Ctrl+B` / `Ctrl+Shift+R` | 重命名当前 Tab |
-| `Ctrl+Shift+←/→` | 左移/右移 Tab |
-| `Ctrl+Shift+T` | 新建 Tab |
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+B` / `Ctrl+Shift+R` | Rename current tab |
+| `Ctrl+Shift+←/→` | Move tab left/right |
+| `Ctrl+Shift+T` | New tab |
 
-### 🪟 分屏
+### 🪟 Pane Splits
 
-| 快捷键 | 功能 |
-|--------|------|
-| `Alt+Shift++` | 水平分屏 |
-| `Alt+Shift+_` | 垂直分屏 |
-| `Alt+←/→/↑/↓` | 在分屏间切换 |
-| `Alt+Shift+←/→/↑/↓` | 调整分屏大小 |
-| `Ctrl+Shift+W` | 关闭当前分屏 |
+| Shortcut | Action |
+|----------|--------|
+| `Alt+Shift++` | Split pane horizontally |
+| `Alt+Shift+_` | Split pane vertically |
+| `Alt+←/→/↑/↓` | Navigate between panes |
+| `Alt+Shift+←/→/↑/↓` | Resize pane |
+| `Ctrl+Shift+W` | Close current pane |
 
-### 📋 复制粘贴
+### 📋 Copy & Paste
 
-| 快捷键 | 功能 |
-|--------|------|
-| `Ctrl+C` | 复制选中内容 / 无选中时发送 Ctrl+C |
-| `Ctrl+V` | 粘贴 |
-| 右键 | 粘贴 |
-| `Ctrl` + 左键 | 打开链接 |
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+C` | Copy selection / Send Ctrl+C interrupt |
+| `Ctrl+V` | Paste from clipboard |
+| Right-click | Paste from clipboard |
+| `Ctrl` + Left-click | Open hyperlink |
 
-### 🔧 其他
+### 🔧 Other
 
-| 快捷键 | 功能 |
-|--------|------|
-| `Ctrl+Shift+D` | 调试面板 |
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+Shift+D` | Debug overlay |
 
-## 📦 安装
+## 📦 Installation
 
-### 🔗 一键安装（推荐）
+### 🔗 One-step install (recommended)
 
-以管理员身份打开命令提示符，创建符号链接：
+Open an elevated Command Prompt and create a symlink:
 
 ```cmd
-mklink "%USERPROFILE%\.wezterm.lua" "你本地的路径\wezterm-config\.wezterm.lua"
+mklink "%USERPROFILE%\.wezterm.lua" "C:\your\path\to\wezterm-config\.wezterm.lua"
 ```
 
-这样配置文件和仓库保持同步，`git pull` 即可更新。
+This keeps your config in sync with the repo — just `git pull` to update.
 
-### 📂 手动复制
+### 📂 Manual copy
 
 ```powershell
-copy 你本地的路径\wezterm-config\.wezterm.lua %USERPROFILE%\.wezterm.lua
+copy C:\your\path\to\wezterm-config\.wezterm.lua %USERPROFILE%\.wezterm.lua
 ```
 
-> 安装后首次打开 WezTerm 即生效，无需额外操作。
+> WezTerm picks up the config on next launch — no extra steps needed.
 
-## 🔧 自定义
+## 🔧 Customization
 
-配置文件中有清晰的分区注释，按需修改即可：
+The config file has clear section comments — edit what you need:
 
-- **Shell** — 修改 `config.default_prog`（当前默认 cmd.exe + Cmder，可改为 PowerShell 或 WSL）
-- **字体** — 修改 `config.font` 和 `config.font_rules`
-- **配色** — 修改 `config.color_schemes` 中的 `Tabby-JetBrains-Darcula`
-- **快捷键** — 在 `config.keys` 和 `config.mouse_bindings` 中增删改
+- **Shell** — Change `config.default_prog` (currently cmd.exe + Cmder; switch to PowerShell or WSL)
+- **Fonts** — Edit `config.font` and `config.font_rules`
+- **Colors** — Modify `Tabby-JetBrains-Darcula` in `config.color_schemes`
+- **Key bindings** — Add/remove entries in `config.keys` and `config.mouse_bindings`
 
-## 📋 依赖
+## 📋 Requirements
 
 - [WezTerm](https://wezfurlong.org/wezterm/) stable ≥ 20240101
-- 推荐安装字体：Source Code Pro、JetBrains Mono、Microsoft YaHei（不装也能用，会回退到后续字体）
+- Recommended fonts: Source Code Pro, JetBrains Mono, Microsoft YaHei (works without them — falls back gracefully)
 
-## 📄 许可证
+## 📄 License
 
 [MIT](./LICENSE)
