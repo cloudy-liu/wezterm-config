@@ -197,29 +197,27 @@ local function rename_current_tab(window, line)
     end
 end
 
+local function rename_tab_action()
+    return wezterm.action_callback(function(window, pane)
+        local current_title = window:active_tab():get_title() or ''
+        window:perform_action(
+            act.PromptInputLine({
+                description = 'Rename current tab',
+                initial_value = current_title,
+                action = wezterm.action_callback(function(win, _p, line)
+                    rename_current_tab(win, line)
+                end),
+            }),
+            pane
+        )
+    end)
+end
+
 config.keys = {
     -- Rename current tab (Ctrl+B)
-    {
-        key = 'b',
-        mods = 'CTRL',
-        action = act.PromptInputLine({
-            description = 'Rename current tab',
-            action = wezterm.action_callback(function(window, _pane, line)
-                rename_current_tab(window, line)
-            end),
-        }),
-    },
+    { key = 'b', mods = 'CTRL', action = rename_tab_action() },
     -- Rename current tab (Ctrl+Shift+R)
-    {
-        key = 'r',
-        mods = 'CTRL|SHIFT',
-        action = act.PromptInputLine({
-            description = 'Rename current tab',
-            action = wezterm.action_callback(function(window, _pane, line)
-                rename_current_tab(window, line)
-            end),
-        }),
-    },
+    { key = 'r', mods = 'CTRL|SHIFT', action = rename_tab_action() },
     -- Debug overlay (don't use default Ctrl+Shift+L: it's typically for Launcher/domain selection)
     { key = 'D', mods = 'CTRL|SHIFT', action = act.ShowDebugOverlay },
 
