@@ -138,6 +138,7 @@ config.force_reverse_video_cursor = true
 -- Note: scrollbar occupies right window_padding space; if right padding=0, WezTerm auto-adds 1 cell.
 config.enable_scroll_bar = true
 config.min_scroll_bar_height = 8 -- Minimum thumb height (in character cells); larger = easier to drag
+config.scrollback_lines = 10000
 
 -- No system title bar: only integrated min/max/close buttons, window is still resizable
 config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
