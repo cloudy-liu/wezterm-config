@@ -1,3 +1,5 @@
+-- wezterm-config-theme: luna-night
+-- Luna-Night theme (purple Acrylic). Install via: python install_theme.py install luna-night
 -- Global WezTerm config (on Windows, typically saved as ~/.wezterm.lua, where ~ is the user home directory)
 local wezterm = require 'wezterm'
 local act = wezterm.action
@@ -79,111 +81,169 @@ config.window_close_confirmation = 'NeverPrompt'
 
 
 -- ============================================================================
--- Colors: scheme + tab/titlebar colors
+-- Colors: Luna-Night (sampled from target screenshot)
+-- Palette: deep purple bg + pink/cyan/amber accents
 -- ============================================================================
 
-config.color_schemes = {
-    ['Tabby-JetBrains-Darcula'] = {
-        foreground = '#ADADAD',
-        background = '#202A35',
+local luna = {
+    bg = '#21213b',
+    bg_dim = '#1a1a30',
+    bg_lift = '#2a2a48',
+    fg = '#a2abc8', -- muted body text (sampled from reference; not near-white)
+    fg_dim = '#767f9c',
+    pink = '#ed5093',
+    pink_soft = '#e85393',
+    cyan = '#61b4d2',
+    amber = '#dc9d4d',
+    split = '#bc773c', -- sandy orange pane dividers (from reference)
+    selection = '#3a2a55',
+}
 
-        cursor_bg = '#ADADAD',
-        cursor_fg = '#202020',
-        cursor_border = '#ADADAD',
+config.color_schemes = {
+    ['Luna-Night'] = {
+        foreground = luna.fg,
+        background = luna.bg,
+
+        cursor_bg = luna.fg,
+        cursor_fg = luna.bg,
+        cursor_border = luna.fg,
+
+        selection_fg = luna.fg,
+        selection_bg = luna.selection,
 
         ansi = {
-            '#202A35', -- Black (matches background; reduces harsh ANSI black blocks)
-            '#FA5355', -- Red
-            '#3A9A5B', -- Green (softened: original #126E00 too dark, changed to milder emerald)
-            '#FF8A65', -- Yellow
-            '#4581EB', -- Blue
-            '#FA54FF', -- Magenta
-            '#33C2C1', -- Cyan
-            '#ADADAD', -- White
+            luna.bg, -- Black
+            '#f07178', -- Red
+            '#7fd99a', -- Green
+            luna.amber, -- Yellow / amber tab accent
+            '#6b9fff', -- Blue
+            luna.pink, -- Magenta / neon pink
+            luna.cyan, -- Cyan
+            luna.fg, -- White
         },
         brights = {
-            '#555555', -- Bright Black
-            '#FB7172', -- Bright Red
-            '#50C878', -- Bright Green (softened: original #67FF4F too harsh, changed to emerald)
-            '#FF7043', -- Bright Yellow
-            '#6D9DF1', -- Bright Blue
-            '#FB82FF', -- Bright Magenta
-            '#60D3D1', -- Bright Cyan
-            '#EEEEEE', -- Bright White
+            '#55557a', -- Bright Black
+            '#ff8b92', -- Bright Red
+            '#9aefb4', -- Bright Green
+            '#e0a154', -- Bright Yellow
+            '#8bb4ff', -- Bright Blue
+            luna.pink_soft, -- Bright Magenta
+            '#7ec8e0', -- Bright Cyan
+            '#b5bcd8', -- Bright White (still muted; reference is never pure white)
         },
     },
 }
-config.color_scheme = 'Tabby-JetBrains-Darcula'
+config.color_scheme = 'Luna-Night'
 
 -- ============================================================================
--- Appearance: tab bar / title bar / buttons
+-- Appearance: pink frame / acrylic blur / retro tabs (reference look)
 -- ============================================================================
 
--- Tabs at top:配合 integrated buttons in the top-right corner
 config.tab_bar_at_bottom = false
-config.show_tab_index_in_tab_bar = false
-config.use_fancy_tab_bar = true
-config.window_background_opacity = 1.0 -- For transparency, try 0.9 / 0.85
+config.show_tab_index_in_tab_bar = false -- custom "N: title" via format-tab-title
+-- Retro tab bar so we can restyle integrated buttons via tab_bar_style
+config.use_fancy_tab_bar = false
+config.hide_tab_bar_if_only_one_tab = false
+config.tab_max_width = 32
+
+-- Acrylic blur + translucent purple shell (wallpaper show-through like the reference)
+config.window_background_opacity = 0.82
+config.win32_system_backdrop = 'Acrylic'
+config.text_background_opacity = 0.92
+
+config.window_padding = {
+    left = 14,
+    -- right padding = scrollbar width when enable_scroll_bar is on
+    right = 10,
+    top = 10,
+    bottom = 10,
+}
+
+-- Dim inactive panes slightly so the active pane reads clearer
+config.inactive_pane_hsb = {
+    saturation = 0.92,
+    brightness = 0.78,
+}
 
 -- Limit refresh rate: reduces flicker with CLI tools that redraw frequently (WezTerm default is 60 FPS)
--- Cursor style: SteadyBar doesn't blink, reducing visual noise during fast output
--- If you prefer blinking, change back to 'BlinkingBar'
-config.default_cursor_style = 'SteadyBar'
 config.max_fps = 60
 config.animation_fps = 1
-config.cursor_blink_rate = 0
-config.force_reverse_video_cursor = true
 
--- Right scrollbar: for drag-scrolling through scrollback (disabled by default)
--- Note: scrollbar occupies right window_padding space; if right padding=0, WezTerm auto-adds 1 cell.
+-- Cursor: thin bar (normal I-beam style)
+config.default_cursor_style = 'SteadyBar'
+config.force_reverse_video_cursor = false
+
 config.enable_scroll_bar = true
-config.min_scroll_bar_height = 8 -- Minimum thumb height (in character cells); larger = easier to drag
+config.min_scroll_bar_height = '1cell'
 config.scrollback_lines = 10000
+config.audible_bell = 'Disabled'
+config.line_height = 1.08
 
--- No system title bar: only integrated min/max/close buttons, window is still resizable
+-- No system title bar; WezTerm draws caption buttons in the tab bar
 config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
+config.integrated_title_button_style = 'Windows'
+config.integrated_title_button_alignment = 'Right'
+config.integrated_title_buttons = { 'Hide', 'Maximize', 'Close' }
 
 config.window_frame = {
-    -- Tab bar font size: larger value makes the tab bar taller (default 10pt on Windows, here 12pt for Tabby-like feel)
-    font_size = 12.0,
-    active_titlebar_fg = '#ADADAD',
-    active_titlebar_bg = '#202A35',
-    inactive_titlebar_bg = '#202020',
+    font_size = 11.0,
+    active_titlebar_fg = luna.fg,
+    active_titlebar_bg = luna.bg_dim,
+    inactive_titlebar_fg = luna.fg_dim,
+    inactive_titlebar_bg = luna.bg_dim,
+}
+
+-- Compact caption buttons (tight padding so they don't dominate the tab bar)
+local function title_btn(glyph, fg, bg)
+    return wezterm.format({
+        { Background = { Color = bg } },
+        { Foreground = { Color = fg } },
+        { Attribute = { Intensity = 'Normal' } },
+        { Text = ' ' .. glyph .. ' ' },
+    })
+end
+
+config.tab_bar_style = {
+    window_hide = title_btn('–', luna.fg_dim, luna.bg_dim),
+    window_hide_hover = title_btn('–', '#e8ecf5', luna.bg_lift),
+    window_maximize = title_btn('□', luna.fg_dim, luna.bg_dim),
+    window_maximize_hover = title_btn('□', '#e8ecf5', luna.bg_lift),
+    window_close = title_btn('×', luna.fg_dim, luna.bg_dim),
+    window_close_hover = title_btn('×', '#ffffff', luna.pink),
 }
 
 config.colors = {
-    -- Scrollbar thumb color: brightened for better visibility on dark backgrounds
-    -- Ref: https://wezterm.org/config/appearance.html#defining-your-own-colors
-    scrollbar_thumb = '#6B90B3',
+    foreground = luna.fg,
+    background = luna.bg,
+    cursor_bg = luna.fg,
+    cursor_fg = luna.bg,
+    cursor_border = luna.fg,
+    selection_fg = luna.fg,
+    selection_bg = luna.selection,
+    scrollbar_thumb = luna.fg_dim, -- muted thin thumb; avoid loud pink strip
+    split = luna.bg_lift, -- near-background; avoid eye-catching divider color
     tab_bar = {
-        -- Tab bar background: matches titlebar/terminal background to avoid visible seams
-        background = '#202A35',
-
-        -- Active tab: same color as editor area + underline/bold to indicate current tab
+        background = luna.bg_dim,
         active_tab = {
-            bg_color = '#202A35',
-            fg_color = '#ffffff',
+            bg_color = luna.bg,
+            fg_color = luna.amber,
             intensity = 'Bold',
-            underline = 'Single',
         },
-
         inactive_tab = {
-            bg_color = '#131D27',
-            fg_color = '#808080',
+            bg_color = luna.bg_dim,
+            fg_color = luna.fg_dim,
         },
-
         inactive_tab_hover = {
-            bg_color = '#3b3052',
-            fg_color = '#909090',
+            bg_color = luna.bg_lift,
+            fg_color = luna.pink_soft,
         },
-
         new_tab = {
-            bg_color = '#202020',
-            fg_color = '#808080',
+            bg_color = luna.bg_dim,
+            fg_color = luna.fg_dim,
         },
         new_tab_hover = {
-            bg_color = '#3b3052',
-            fg_color = '#909090',
+            bg_color = luna.bg_lift,
+            fg_color = luna.pink,
         },
     },
 }
@@ -240,8 +300,8 @@ config.keys = {
                 window:perform_action(act.CopyTo('Clipboard'), pane)
                 -- Show "Copied" badge in right status bar (mimics Tabby's toast)
                 window:set_right_status(wezterm.format({
-                    { Background = { Color = '#3A3A3A' } },
-                    { Foreground = { Color = '#FFFFFF' } },
+                    { Background = { Color = '#ed5093' } },
+                    { Foreground = { Color = '#21213b' } },
                     { Text = '  Copied  ' },
                 }))
                 -- Clear badge after 2 seconds
@@ -264,6 +324,11 @@ config.keys = {
     { key = 'RightArrow', mods = 'ALT', action = act.ActivatePaneDirection('Right') },
     { key = 'UpArrow',    mods = 'ALT', action = act.ActivatePaneDirection('Up') },
     { key = 'DownArrow',  mods = 'ALT', action = act.ActivatePaneDirection('Down') },
+
+    -- ── Pane cycle (Alt+Tab-like): keep pressing to rotate focus ──
+    -- Alt+` mirrors Windows "cycle windows of same app"; wraps around.
+    { key = '`', mods = 'ALT', action = act.ActivatePaneDirection('Next') },
+    { key = '`', mods = 'ALT|SHIFT', action = act.ActivatePaneDirection('Prev') },
 
     -- ── Pane resize (aligned with Windows Terminal) ──
     { key = 'LeftArrow',  mods = 'ALT|SHIFT', action = act.AdjustPaneSize({ 'Left', 1 }) },
@@ -314,18 +379,18 @@ wezterm.on('format-tab-title', function(tab, _tabs, _panes, _cfg, _hover, max_wi
     local title = (tab.tab_title and #tab.tab_title > 0) and tab.tab_title or (tab.active_pane.title or '')
     title = strip_windows_admin_prefix(title)
 
-    -- Truncate + pad to fill the tab's allocated width
+    -- Reference-style: "1: title" (1-based index)
+    local idx = tostring(tab.tab_index + 1)
+    local marker = tab.is_active and '* ' or ''
+    local label = idx .. ': ' .. marker .. title
+
     local max_content = math.max(1, max_width - 2)
-    if #title > max_content then
-        title = string.sub(title, 1, max_content)
+    if #label > max_content then
+        label = string.sub(label, 1, max_content - 1) .. '…'
     end
 
-    local remaining = math.max(0, max_width - #title)
-    local left = math.floor(remaining / 2)
-    local right = remaining - left
-
     return {
-        { Text = string.rep(' ', left) .. title .. string.rep(' ', right) },
+        { Text = ' ' .. label .. ' ' },
     }
 end)
 

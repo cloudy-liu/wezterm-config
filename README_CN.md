@@ -30,11 +30,12 @@ WezTerm 默认配置在很多地方对 Windows 用户不太友好，这个配置
 
 ## ✨ 功能一览
 
-- **配色** — 自定义 `Tabby-JetBrains-Darcula` 暗色主题
+- **多主题** — `themes/` 下可选 `tabby-darcula` / `luna-night`，用脚本一键装到全局
+- **配色** — Tabby-JetBrains-Darcula，或 Luna-Night（深紫 Acrylic）
 - **字体** — Source Code Pro → JetBrains Mono → Consolas → Microsoft YaHei → Segoe UI Symbol → Noto Sans Symbols 2
 - **智能 Ctrl+C** — 选中时复制 + 状态栏"已复制"提示（2 秒后消失），未选中时发送中断
 - **右键粘贴** — 和 Tabby 一样
-- **分屏** — 对齐 Windows Terminal 快捷键（创建/导航/调整/关闭）
+- **分屏** — 对齐 Windows Terminal 快捷键（创建/导航/调整/关闭）；`Alt+\`` 轮询分屏
 - **Tab 管理** — 重命名、移动、标题居中、去除管理员前缀
 - **无边框标题栏** — 集成最小化/最大化/关闭按钮
 - **CRLF → LF 粘贴修正** — 远端 shell 不再隔行
@@ -58,6 +59,7 @@ WezTerm 默认配置在很多地方对 Windows 用户不太友好，这个配置
 | `Alt+Shift++` | 水平分屏 |
 | `Alt+Shift+_` | 垂直分屏 |
 | `Alt+←/→/↑/↓` | 在分屏间切换 |
+| `Alt+\`` / `Alt+Shift+\`` | 轮询下一个 / 上一个分屏 |
 | `Alt+Shift+←/→/↑/↓` | 调整分屏大小 |
 | `Ctrl+Shift+W` | 关闭当前分屏 |
 
@@ -78,31 +80,41 @@ WezTerm 默认配置在很多地方对 Windows 用户不太友好，这个配置
 
 ## 📦 安装
 
-### 🔗 一键安装（推荐）
-
-以管理员身份打开命令提示符，创建符号链接：
-
-```cmd
-mklink "%USERPROFILE%\.wezterm.lua" "你本地的路径\wezterm-config\.wezterm.lua"
-```
-
-这样配置文件和仓库保持同步，`git pull` 即可更新。
-
-### 📂 手动复制
+主题文件在 `themes/`，用脚本安装到 `%USERPROFILE%\.wezterm.lua`。
 
 ```powershell
-copy 你本地的路径\wezterm-config\.wezterm.lua %USERPROFILE%\.wezterm.lua
+# 查看可用主题
+python install_theme.py list
+
+# 安装主题（默认 copy；会自动备份旧的全局配置）
+python install_theme.py install tabby-darcula
+python install_theme.py luna-night          # 简写：等同于 install luna-night
+
+# 查看当前全局用的是哪套
+python install_theme.py status
+
+# 可选：符号链接（改仓库即同步；Windows 可能需要管理员或开发者模式）
+python install_theme.py install luna-night --mode link
 ```
 
-> 安装后首次打开 WezTerm 即生效，无需额外操作。
+> 安装后重载 WezTerm 或新开窗口即可生效。
+
+### 可用主题
+
+| 名字 | 说明 |
+|------|------|
+| `tabby-darcula` | Tabby / JetBrains Darcula 实心暗色（默认风格） |
+| `luna-night` | Luna-Night 深紫半透明 Acrylic |
+
+新增主题：在 `themes/` 下加一个 `名字.lua`，文件头加上 `-- wezterm-config-theme: 名字` 即可被 `list` / `install` 识别。
 
 ## 🔧 自定义
 
-配置文件中有清晰的分区注释，按需修改即可：
+编辑 `themes/<主题名>.lua` 后重新 `install`（copy 模式），或使用 `--mode link` 直接改仓库文件：
 
 - **Shell** — 修改 `config.default_prog`（当前默认 cmd.exe + Cmder，可改为 PowerShell 或 WSL）
 - **字体** — 修改 `config.font` 和 `config.font_rules`
-- **配色** — 修改 `config.color_schemes` 中的 `Tabby-JetBrains-Darcula`
+- **配色** — 修改对应主题里的 `config.color_schemes`
 - **快捷键** — 在 `config.keys` 和 `config.mouse_bindings` 中增删改
 
 ## 📋 依赖
