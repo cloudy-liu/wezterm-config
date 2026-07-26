@@ -30,11 +30,12 @@ WezTerm's default configuration isn't very Windows-friendly. This config fixes t
 
 ## ✨ Features
 
-- **Color scheme** — Custom `Tabby-JetBrains-Darcula` dark theme
+- **Multiple themes** — Install `tabby-darcula` or `luna-night` from `themes/` with one script
+- **Color schemes** — Tabby-JetBrains-Darcula, or Luna-Night (purple Acrylic)
 - **Fonts** — Source Code Pro → JetBrains Mono → Consolas → Microsoft YaHei → Segoe UI Symbol → Noto Sans Symbols 2
 - **Smart Ctrl+C** — Copy when text is selected (with "Copied" toast for 2s), send interrupt when nothing is selected
 - **Right-click paste** — Just like Tabby
-- **Pane splits** — Windows Terminal-style shortcuts (create/navigate/resize/close)
+- **Pane splits** — Windows Terminal-style shortcuts (create/navigate/resize/close); `Alt+\`` cycles panes
 - **Tab management** — Rename, move, centered titles, admin prefix stripped
 - **Borderless title bar** — Integrated min/max/close buttons
 - **CRLF → LF paste fix** — No more double-spacing in remote shells
@@ -58,6 +59,7 @@ WezTerm's default configuration isn't very Windows-friendly. This config fixes t
 | `Alt+Shift++` | Split pane horizontally |
 | `Alt+Shift+_` | Split pane vertically |
 | `Alt+←/→/↑/↓` | Navigate between panes |
+| `Alt+\`` / `Alt+Shift+\`` | Cycle next / previous pane |
 | `Alt+Shift+←/→/↑/↓` | Resize pane |
 | `Ctrl+Shift+W` | Close current pane |
 
@@ -78,31 +80,41 @@ WezTerm's default configuration isn't very Windows-friendly. This config fixes t
 
 ## 📦 Installation
 
-### 🔗 One-step install (recommended)
-
-Open an elevated Command Prompt and create a symlink:
-
-```cmd
-mklink "%USERPROFILE%\.wezterm.lua" "C:\your\path\to\wezterm-config\.wezterm.lua"
-```
-
-This keeps your config in sync with the repo — just `git pull` to update.
-
-### 📂 Manual copy
+Themes live in `themes/`. Install one into `%USERPROFILE%\.wezterm.lua`:
 
 ```powershell
-copy C:\your\path\to\wezterm-config\.wezterm.lua %USERPROFILE%\.wezterm.lua
+# List themes
+python install_theme.py list
+
+# Install (default: copy; previous global config is backed up)
+python install_theme.py install tabby-darcula
+python install_theme.py luna-night          # shorthand for: install luna-night
+
+# Show which theme is active globally
+python install_theme.py status
+
+# Optional: symlink so repo edits apply live (may need Admin / Developer Mode on Windows)
+python install_theme.py install luna-night --mode link
 ```
 
-> WezTerm picks up the config on next launch — no extra steps needed.
+> Reload WezTerm or open a new window after installing.
+
+### Available themes
+
+| Name | Description |
+|------|-------------|
+| `tabby-darcula` | Tabby / JetBrains Darcula solid dark theme |
+| `luna-night` | Luna-Night purple translucent Acrylic theme |
+
+To add a theme: drop `themes/<name>.lua` with a header line `-- wezterm-config-theme: <name>`.
 
 ## 🔧 Customization
 
-The config file has clear section comments — edit what you need:
+Edit `themes/<name>.lua`, then re-run `install` (copy mode), or use `--mode link` and edit in place:
 
 - **Shell** — Change `config.default_prog` (currently cmd.exe + Cmder; switch to PowerShell or WSL)
 - **Fonts** — Edit `config.font` and `config.font_rules`
-- **Colors** — Modify `Tabby-JetBrains-Darcula` in `config.color_schemes`
+- **Colors** — Modify `config.color_schemes` in the chosen theme
 - **Key bindings** — Add/remove entries in `config.keys` and `config.mouse_bindings`
 
 ## 📋 Requirements
