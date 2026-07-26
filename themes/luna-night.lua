@@ -141,8 +141,9 @@ config.color_scheme = 'Luna-Night'
 
 config.tab_bar_at_bottom = false
 config.show_tab_index_in_tab_bar = false -- custom "N: title" via format-tab-title
--- Retro tab bar so we can restyle integrated buttons via tab_bar_style
-config.use_fancy_tab_bar = false
+-- Fancy tab bar: hover close (x) like tabby-darcula; retro bar has no per-tab x
+config.use_fancy_tab_bar = true
+config.show_close_tab_button_in_tabs = true
 config.hide_tab_bar_if_only_one_tab = false
 config.tab_max_width = 32
 
@@ -191,25 +192,10 @@ config.window_frame = {
     active_titlebar_bg = luna.bg_dim,
     inactive_titlebar_fg = luna.fg_dim,
     inactive_titlebar_bg = luna.bg_dim,
-}
-
--- Compact caption buttons (tight padding so they don't dominate the tab bar)
-local function title_btn(glyph, fg, bg)
-    return wezterm.format({
-        { Background = { Color = bg } },
-        { Foreground = { Color = fg } },
-        { Attribute = { Intensity = 'Normal' } },
-        { Text = ' ' .. glyph .. ' ' },
-    })
-end
-
-config.tab_bar_style = {
-    window_hide = title_btn('–', luna.fg_dim, luna.bg_dim),
-    window_hide_hover = title_btn('–', '#e8ecf5', luna.bg_lift),
-    window_maximize = title_btn('□', luna.fg_dim, luna.bg_dim),
-    window_maximize_hover = title_btn('□', '#e8ecf5', luna.bg_lift),
-    window_close = title_btn('×', luna.fg_dim, luna.bg_dim),
-    window_close_hover = title_btn('×', '#ffffff', luna.pink),
+    button_fg = luna.fg_dim,
+    button_bg = luna.bg_dim,
+    button_hover_fg = '#e8ecf5',
+    button_hover_bg = luna.bg_lift,
 }
 
 config.colors = {
