@@ -140,7 +140,7 @@ config.color_scheme = 'Luna-Night'
 -- ============================================================================
 
 config.tab_bar_at_bottom = false
-config.show_tab_index_in_tab_bar = false -- custom "N: title" via format-tab-title
+config.show_tab_index_in_tab_bar = false
 -- Fancy tab bar: hover close (x) like tabby-darcula; retro bar has no per-tab x
 config.use_fancy_tab_bar = true
 config.show_close_tab_button_in_tabs = true
@@ -365,18 +365,13 @@ wezterm.on('format-tab-title', function(tab, _tabs, _panes, _cfg, _hover, max_wi
     local title = (tab.tab_title and #tab.tab_title > 0) and tab.tab_title or (tab.active_pane.title or '')
     title = strip_windows_admin_prefix(title)
 
-    -- Reference-style: "1: title" (1-based index)
-    local idx = tostring(tab.tab_index + 1)
-    local marker = tab.is_active and '* ' or ''
-    local label = idx .. ': ' .. marker .. title
-
     local max_content = math.max(1, max_width - 2)
-    if #label > max_content then
-        label = string.sub(label, 1, max_content - 1) .. '…'
+    if #title > max_content then
+        title = string.sub(title, 1, max_content - 1) .. '…'
     end
 
     return {
-        { Text = ' ' .. label .. ' ' },
+        { Text = ' ' .. title .. ' ' },
     }
 end)
 
