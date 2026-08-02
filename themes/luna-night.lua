@@ -178,7 +178,6 @@ config.enable_scroll_bar = true
 config.min_scroll_bar_height = '1cell'
 config.scrollback_lines = 10000
 config.audible_bell = 'Disabled'
-config.line_height = 1.08
 
 -- No system title bar; WezTerm draws caption buttons in the tab bar
 config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
@@ -187,7 +186,7 @@ config.integrated_title_button_alignment = 'Right'
 config.integrated_title_buttons = { 'Hide', 'Maximize', 'Close' }
 
 config.window_frame = {
-    font_size = 11.0,
+    font_size = 12.0,
     active_titlebar_fg = luna.fg,
     active_titlebar_bg = luna.bg_dim,
     inactive_titlebar_fg = luna.fg_dim,
