@@ -1,127 +1,96 @@
-# 🐱 WezTerm Config
+# Windows WezTerm 配置
+
 [English](./README.md)
 
-![Demo](./demo.png)
+一套面向 Windows 的 [WezTerm](https://wezfurlong.org/wezterm/) 完整配置：包含五套可安装主题、Cmder/Clink 集成、实用的分屏与标签快捷键，以及可靠的中英文字体回退。**默认主题为 Ghostty Frappé。**
 
-一个开箱即用的 [WezTerm](https://wezfurlong.org/wezterm/) 终端配置，专为 Windows 用户打造。
+![WezTerm 中的 Ghostty Frappé 主题](./Ghostty.png)
 
-从 Tabby 转过来？这个配置已经帮你把最常用的习惯都对齐了。
+## 核心特性
 
----
+- 五套暗色主题，拥有不同配色与窗口外观
+- 智能 `Ctrl+C`：有选区时复制，无选区时发送中断
+- 右键粘贴，以及对齐 Windows Terminal 的分屏快捷键
+- 粘贴时自动将 CRLF 转为 LF，避免远端终端或编辑器出现空行
+- 中英文与符号字体回退
+- 无边框标签栏，集成 Windows 窗口控制按钮
 
-## 😫 解决了什么问题
+## 主题
 
-WezTerm 默认配置在很多地方对 Windows 用户不太友好，这个配置逐一修掉了这些痛点：
+| 主题 | 外观 |
+|---|---|
+| `ghostty-frappe` **（默认）** | 柔和的 Catppuccin Frappé 粉彩配色，紧凑、实色、无缝窗口外观 |
+| `ghostty-mocha` | 更深的 Catppuccin Mocha 黑紫配色，实色无缝窗口外观 |
+| `iterm2-solarized-dark` | 低眩光青蓝 Solarized Dark，搭配克制的 Acrylic 模糊 |
+| `luna-night` | 深紫色半透明 Acrylic |
+| `tabby-darcula` | Tabby / JetBrains Darcula 实心暗色主题 |
 
-| 问题 | 这个配置怎么做 |
-|------|---------------|
-| 粘贴到远端 vim/git commit 会出现隔行空行 | 自动将 CRLF 转为 LF |
-| 中文显示乱码或回退到难看的字体 | 6 级字体回退链，中英文都有合适字形 |
-| AI 工具（Cursor Thinking 等）的暗淡文字太细看不清 | Half-intensity 文本用 OneDark 注释灰显示，不用 ExtraLight 字重 |
-| 关窗口每次都要确认 | 关闭窗口确认弹窗已关闭 |
-| 没有右键粘贴 | 右键粘贴，和 Tabby 一样 |
-| Ctrl+C 要么只复制要么只中断，不能兼得 | 有选中 → 复制 + 显示"已复制"提示；没选中 → 发送 Ctrl+C 中断 |
-| 分屏操作没有顺手快捷键 | 对齐 Windows Terminal：Alt+方向键导航、Alt+Shift+方向键调整大小 |
-| Tab 不能重命名 | Ctrl+B 或 Ctrl+Shift+R 重命名 |
-| 管理员模式 Tab 标题带"管理员:"前缀，太长 | 自动去除 |
-| 标题栏占空间 | 无系统标题栏，集成按钮在 Tab 栏右侧 |
-| 缺字弹窗烦人 | 关闭缺字警告 |
-| 绿色太暗或太亮 | ANSI 绿色调为翡翠绿，不刺眼也不看不清 |
+> `ghostty-*` 和 `iterm2-*` 表示配色与外观来源。所有主题实际运行在 WezTerm 中，不是对应终端应用，也不代表它们在 macOS 上的默认主题。
 
-## ✨ 功能一览
+## 安装
 
-- **多主题** — `themes/` 下可选 `tabby-darcula` / `luna-night`，用脚本一键装到全局
-- **配色** — Tabby-JetBrains-Darcula，或 Luna-Night（深紫 Acrylic）
-- **字体** — Source Code Pro → JetBrains Mono → Consolas → Microsoft YaHei → Segoe UI Symbol → Noto Sans Symbols 2
-- **智能 Ctrl+C** — 选中时复制 + 状态栏"已复制"提示（2 秒后消失），未选中时发送中断
-- **右键粘贴** — 和 Tabby 一样
-- **分屏** — 对齐 Windows Terminal 快捷键（创建/导航/调整/关闭）；`Alt+\`` 轮询分屏
-- **Tab 管理** — 重命名、移动、标题居中、去除管理员前缀
-- **无边框标题栏** — 集成最小化/最大化/关闭按钮
-- **CRLF → LF 粘贴修正** — 远端 shell 不再隔行
-- **光标不闪烁** — SteadyBar 样式，减少视觉干扰
-- **滚动条** — 默认开启，方便拖拽浏览历史输出
-
-## ⌨️ 快捷键
-
-### 🏷️ Tab 管理
-
-| 快捷键 | 功能 |
-|--------|------|
-| `Ctrl+B` / `Ctrl+Shift+R` | 重命名当前 Tab |
-| `Ctrl+Shift+←/→` | 左移/右移 Tab |
-| `Ctrl+Shift+T` | 新建 Tab |
-
-### 🪟 分屏
-
-| 快捷键 | 功能 |
-|--------|------|
-| `Alt+Shift++` | 水平分屏 |
-| `Alt+Shift+_` | 垂直分屏 |
-| `Alt+←/→/↑/↓` | 在分屏间切换 |
-| `Alt+\`` / `Alt+Shift+\`` | 轮询下一个 / 上一个分屏 |
-| `Alt+Shift+←/→/↑/↓` | 调整分屏大小 |
-| `Ctrl+Shift+W` | 关闭当前分屏 |
-
-### 📋 复制粘贴
-
-| 快捷键 | 功能 |
-|--------|------|
-| `Ctrl+C` | 复制选中内容 / 无选中时发送 Ctrl+C |
-| `Ctrl+V` | 粘贴 |
-| 右键 | 粘贴 |
-| `Ctrl` + 左键 | 打开链接 |
-
-### 🔧 其他
-
-| 快捷键 | 功能 |
-|--------|------|
-| `Ctrl+Shift+D` | 调试面板 |
-
-## 📦 安装
-
-主题文件在 `themes/`，用脚本安装到 `%USERPROFILE%\.wezterm.lua`。
-
-```powershell
-# 查看可用主题
-python install_theme.py list
-
-# 安装主题（默认 copy；会自动备份旧的全局配置）
-python install_theme.py install tabby-darcula
-python install_theme.py luna-night          # 简写：等同于 install luna-night
-
-# 查看当前全局用的是哪套
-python install_theme.py status
-
-# 可选：符号链接（改仓库即同步；Windows 可能需要管理员或开发者模式）
-python install_theme.py install luna-night --mode link
-```
-
-> 安装后重载 WezTerm 或新开窗口即可生效。
-
-### 可用主题
-
-| 名字 | 说明 |
-|------|------|
-| `tabby-darcula` | Tabby / JetBrains Darcula 实心暗色（默认风格） |
-| `luna-night` | Luna-Night 深紫半透明 Acrylic |
-
-新增主题：在 `themes/` 下加一个 `名字.lua`，文件头加上 `-- wezterm-config-theme: 名字` 即可被 `list` / `install` 识别。
-
-## 🔧 自定义
-
-编辑 `themes/<主题名>.lua` 后重新 `install`（copy 模式），或使用 `--mode link` 直接改仓库文件：
-
-- **Shell** — 修改 `config.default_prog`（当前默认 cmd.exe + Cmder，可改为 PowerShell 或 WSL）
-- **字体** — 修改 `config.font` 和 `config.font_rules`
-- **配色** — 修改对应主题里的 `config.color_schemes`
-- **快捷键** — 在 `config.keys` 和 `config.mouse_bindings` 中增删改
-
-## 📋 依赖
+依赖：
 
 - [WezTerm](https://wezfurlong.org/wezterm/) stable ≥ 20240101
-- 推荐安装字体：Source Code Pro、JetBrains Mono、Microsoft YaHei（不装也能用，会回退到后续字体）
+- Python ≥ 3.10
+- Git；也可以下载仓库 ZIP，并在解压目录中运行后续命令
+- 推荐字体：Source Code Pro、JetBrains Mono 和 Microsoft YaHei；缺失字体会自动回退
 
-## 📄 许可证
+> **Shell 路径：**当前所有主题都通过 `D:\tools\cmder_full\cmder\vendor\init.bat` 使用 `cmd.exe` 启动 Cmder。如果你的 Cmder 位于其他目录，或希望使用 PowerShell/WSL，请在安装前修改所选主题中的 `config.default_prog`。
+
+```powershell
+# 获取项目
+git clone https://github.com/cloudy-liu/wezterm-config.git
+cd wezterm-config
+
+# 查看主题
+python install_theme.py list
+
+# 安装默认的 Ghostty Frappé 主题
+python install_theme.py install
+
+# 安装其他主题
+python install_theme.py install luna-night
+
+# 查看当前全局主题
+python install_theme.py status
+```
+
+例如，PowerShell 7 可以将 `config.default_prog` 设为 `{ 'pwsh.exe', '-NoLogo' }`，WSL 可以设为 `{ 'wsl.exe' }`。
+
+默认使用 copy 模式。安装前，脚本会将已有的 `%USERPROFILE%\.wezterm.lua` 备份为 `.wezterm.lua.bak-<时间戳>`。安装完成后，重新加载 WezTerm 或新开窗口即可生效。
+
+如需让仓库修改立即生效，可以使用 link 模式；Windows 可能需要开启开发者模式或使用管理员权限。此时全局配置指向仓库中的主题文件，因此不要移动或删除仓库：
+
+```powershell
+python install_theme.py install ghostty-frappe --mode link
+```
+
+## 快捷键
+
+| 快捷键 | 功能 |
+|---|---|
+| `Ctrl+C` | 有选区时复制，无选区时发送 `Ctrl+C` |
+| `Ctrl+V` / 右键 | 粘贴剪贴板内容 |
+| `Ctrl` + 左键 | 打开链接 |
+| `Alt+Shift++` / `Alt+Shift+_` | 水平 / 垂直分屏 |
+| `Alt+←/→/↑/↓` | 在分屏间切换 |
+| `Alt+Shift+←/→/↑/↓` | 调整当前分屏大小 |
+| `` Alt+` `` / `` Alt+Shift+` `` | 轮询下一个 / 上一个分屏 |
+| `Ctrl+Shift+W` | 关闭当前分屏 |
+| `Ctrl+B` / `Ctrl+Shift+R` | 重命名当前标签 |
+| `Ctrl+Shift+←/→` | 左移 / 右移当前标签 |
+| `Ctrl+Shift+T` | 新建标签 |
+
+## 自定义
+
+编辑 `themes/<主题名>.lua` 后，在 copy 模式下重新安装。link 模式会直接应用仓库中的修改。
+
+- Shell：`config.default_prog`
+- 字体：`config.font` 和 `config.font_rules`
+- 配色：`config.color_schemes`
+- 快捷键：`config.keys` 和 `config.mouse_bindings`
+
+## 许可证
 
 [MIT](./LICENSE)

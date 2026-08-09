@@ -15,10 +15,14 @@ THEME_MARKER_RE = re.compile(r"^--\s*wezterm-config-theme:\s*(\S+)", re.MULTILIN
 REPO_ROOT = Path(__file__).resolve().parent
 THEMES_DIR = REPO_ROOT / "themes"
 GLOBAL_CONFIG = Path.home() / ".wezterm.lua"
+DEFAULT_THEME = "ghostty-frappe"
 
 # Optional short descriptions shown by `list`
 THEME_DESCRIPTIONS = {
-    "tabby-darcula": "Tabby / JetBrains Darcula (default solid theme)",
+    "ghostty-frappe": "Ghostty-inspired Catppuccin Frappe theme (default)",
+    "ghostty-mocha": "Ghostty-inspired Catppuccin Mocha theme",
+    "iterm2-solarized-dark": "iTerm2-inspired Solarized Dark theme",
+    "tabby-darcula": "Tabby / JetBrains Darcula solid theme",
     "luna-night": "Luna-Night purple Acrylic theme",
 }
 
@@ -146,7 +150,12 @@ def build_parser() -> argparse.ArgumentParser:
     p_status.set_defaults(func=cmd_status)
 
     p_install = sub.add_parser("install", help="Install a theme by name")
-    p_install.add_argument("name", help="Theme name (filename without .lua)")
+    p_install.add_argument(
+        "name",
+        nargs="?",
+        default=DEFAULT_THEME,
+        help=f"Theme name (default: {DEFAULT_THEME})",
+    )
     p_install.add_argument(
         "--mode",
         choices=("copy", "link"),
