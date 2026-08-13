@@ -17,8 +17,67 @@ local config = wezterm.config_builder()
 -- Basics: startup / fonts / cursor
 -- ============================================================================
 
--- Windows paths: use double backslashes \\ or forward slashes /
-config.default_prog = { 'cmd.exe', '/k', 'D:/tools/cmder_full/cmder/vendor/init.bat' }
+-- Resolve Cmder without a hardcoded machine path:
+-- WEZTERM_CMDER_INIT → CMDER_ROOT → where cmder → common paths → plain cmd.exe
+local function file_exists(path)
+    local f = io.open(path, 'r')
+    if f then
+        f:close()
+        return true
+    end
+    return false
+end
+
+local function normalize_slashes(path)
+    return (path:gsub('\\', '/'))
+end
+
+local function dirname(path)
+    return normalize_slashes(path):match('^(.*)/[^/]+$')
+end
+
+local function resolve_default_prog()
+    local candidates = {}
+
+    local explicit = os.getenv('WEZTERM_CMDER_INIT')
+    if explicit and explicit ~= '' then
+        table.insert(candidates, normalize_slashes(explicit))
+    end
+
+    local cmder_root = os.getenv('CMDER_ROOT')
+    if cmder_root and cmder_root ~= '' then
+        table.insert(candidates, normalize_slashes(cmder_root) .. '/vendor/init.bat')
+    end
+
+    local ok, stdout = wezterm.run_child_process({ 'where.exe', 'cmder' })
+    if ok and stdout and stdout ~= '' then
+        local exe = stdout:match('^[^\r\n]+')
+        local dir = exe and dirname(exe)
+        if dir then
+            table.insert(candidates, dir .. '/vendor/init.bat')
+        end
+    end
+
+    local home = normalize_slashes(os.getenv('USERPROFILE') or '')
+    for _, p in ipairs({
+        home .. '/cmder/vendor/init.bat',
+        home .. '/scoop/apps/cmder/current/vendor/init.bat',
+        'C:/tools/cmder/vendor/init.bat',
+        'C:/cmder/vendor/init.bat',
+    }) do
+        table.insert(candidates, p)
+    end
+
+    for _, init_bat in ipairs(candidates) do
+        if file_exists(init_bat) then
+            return { 'cmd.exe', '/k', init_bat }
+        end
+    end
+
+    return { 'cmd.exe' }
+end
+
+config.default_prog = resolve_default_prog()
 
 config.font = wezterm.font_with_fallback({
     'Source Code Pro',

@@ -36,7 +36,7 @@
 - Git；也可以下载仓库 ZIP，并在解压目录中运行后续命令
 - 推荐字体：Source Code Pro、JetBrains Mono 和 Microsoft YaHei；缺失字体会自动回退
 
-> **Shell 路径：**当前所有主题都通过 `D:\tools\cmder_full\cmder\vendor\init.bat` 使用 `cmd.exe` 启动 Cmder。如果你的 Cmder 位于其他目录，或希望使用 PowerShell/WSL，请在安装前修改所选主题中的 `config.default_prog`。
+> **Shell 路径：**所有主题会按以下顺序自动解析 Cmder：`WEZTERM_CMDER_INIT` → `CMDER_ROOT` → `where cmder` → 常见安装路径 → 普通 `cmd.exe`。把 Cmder 加入 `PATH`，或设置官方变量 `CMDER_ROOT`，即可启用 Clink/Cmder；都找不到时仍会正常启动普通 `cmd.exe`。若希望改用 PowerShell/WSL，请在安装前修改所选主题中的 `config.default_prog`。
 
 ```powershell
 # 获取项目
