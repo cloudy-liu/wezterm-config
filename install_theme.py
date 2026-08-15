@@ -20,6 +20,7 @@ DEFAULT_THEME = "ghostty-frappe"
 # Optional short descriptions shown by `list`
 THEME_DESCRIPTIONS = {
     "ghostty-frappe": "Ghostty-inspired Catppuccin Frappe theme (default)",
+    "ghostty-frappe-pill": "Ghostty Frappe with tmux-style rounded pill tabs",
     "ghostty-mocha": "Ghostty-inspired Catppuccin Mocha theme",
     "iterm2-solarized-dark": "iTerm2-inspired Solarized Dark theme",
     "tabby-darcula": "Tabby / JetBrains Darcula solid theme",
