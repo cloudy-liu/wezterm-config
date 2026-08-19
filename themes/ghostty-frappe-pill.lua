@@ -270,7 +270,8 @@ config.integrated_title_button_alignment = 'Right'
 config.integrated_title_buttons = { 'Hide', 'Maximize', 'Close' }
 
 -- Fancy tab bar chrome: same mono font as the terminal so pill text matches;
--- all titlebar/button surfaces use the crust bar color the pills float on.
+-- all titlebar/button surfaces use the terminal base color so the tab bar stays
+-- seamless with the non-pill theme. The capsules provide the tab separation.
 -- Raise font_size here to make the whole bar (and the pills) taller.
 config.window_frame = {
     font = wezterm.font_with_fallback({
@@ -281,11 +282,11 @@ config.window_frame = {
     }),
     font_size = 12.0,
     active_titlebar_fg = frappe.text,
-    active_titlebar_bg = frappe.crust,
+    active_titlebar_bg = frappe.base,
     inactive_titlebar_fg = frappe.overlay2,
-    inactive_titlebar_bg = frappe.crust,
+    inactive_titlebar_bg = frappe.base,
     button_fg = frappe.subtext0,
-    button_bg = frappe.crust,
+    button_bg = frappe.base,
     button_hover_fg = frappe.text,
     button_hover_bg = frappe.surface0,
 }
@@ -301,34 +302,34 @@ config.colors = {
     scrollbar_thumb = frappe.surface2,
     split = frappe.surface1,
     tab_bar = {
-        -- Bar darker than the terminal surface so the pills read as floating
-        background = frappe.crust,
+        -- Match the terminal surface so the pill bar has no separate color band.
+        background = frappe.base,
         -- Every button surface matches the bar color: the fancy buttons are
         -- invisible and only the format-tab-title capsules show. fg values
         -- are fallbacks only.
         active_tab = {
-            bg_color = frappe.crust,
+            bg_color = frappe.base,
             fg_color = frappe.peach,
             intensity = 'Bold',
         },
         inactive_tab = {
-            bg_color = frappe.crust,
+            bg_color = frappe.base,
             fg_color = frappe.overlay1,
         },
         inactive_tab_hover = {
-            bg_color = frappe.crust,
+            bg_color = frappe.base,
             fg_color = frappe.pink,
         },
         new_tab = {
-            bg_color = frappe.crust,
+            bg_color = frappe.base,
             fg_color = frappe.overlay1,
         },
         new_tab_hover = {
             bg_color = frappe.surface0,
             fg_color = frappe.mauve,
         },
-        -- Fancy-only: the separator line between tabs; hide it in the bar color
-        inactive_tab_edge = frappe.crust,
+        -- Fancy-only: hide the separator in the seamless bar color.
+        inactive_tab_edge = frappe.base,
     },
 }
 
@@ -468,12 +469,14 @@ local RIGHT_CAP = utf8.char(0xe0b4)
 --   <gap> ◖ title ◗
 --   inactive = muted gray capsule; active = accent-filled capsule
 local pill = {
-    bar_bg = frappe.crust,
+    -- Keep the space around each capsule identical to the terminal surface;
+    -- the capsule shape itself provides enough visual separation.
+    bar_bg = frappe.base,
     -- inactive tab: muted gray capsule
     tab_bg = frappe.surface0,
     tab_fg = frappe.overlay1,
     -- active tab: accent-filled capsule (dark text on peach) so it reads at a glance;
-    -- gray-on-gray variants are indistinguishable on the crust bar
+    -- the inactive capsule stays quiet against the seamless base-colored bar.
     active_tab_bg = frappe.peach,
     active_tab_fg = frappe.crust,
     -- hovered inactive tab
