@@ -1,6 +1,6 @@
 -- wezterm-config-theme: ghostty-frappe-pill
 -- Ghostty-inspired Catppuccin Frappe theme with tmux/ccmux-style rounded pill tabs.
--- Fork of ghostty-frappe; only the tab bar treatment differs.
+-- Fork of ghostty-frappe; pill tabs and Hack as the primary font differ.
 -- Install via: python install_theme.py install ghostty-frappe-pill
 -- Palette sources:
 --   https://ghostty.org/docs/features/theme
@@ -82,7 +82,7 @@ end
 config.default_prog = resolve_default_prog()
 
 config.font = wezterm.font_with_fallback({
-    'Source Code Pro',
+    'Hack',
     'JetBrains Mono',
     'Consolas',
     'Microsoft YaHei',
@@ -100,7 +100,7 @@ config.font_rules = {
         italic = false,
         font = wezterm.font_with_fallback(
             {
-                { family = 'Source Code Pro', weight = 'Regular' },
+                { family = 'Hack', weight = 'Regular' },
                 { family = 'JetBrains Mono', weight = 'Regular' },
                 { family = 'Consolas', weight = 'Regular' },
                 'Microsoft YaHei',
@@ -115,7 +115,7 @@ config.font_rules = {
         italic = true,
         font = wezterm.font_with_fallback(
             {
-                { family = 'Source Code Pro', weight = 'Regular', style = 'Italic' },
+                { family = 'Hack', weight = 'Regular', style = 'Italic' },
                 { family = 'JetBrains Mono', weight = 'Regular', style = 'Italic' },
                 { family = 'Consolas', weight = 'Regular', style = 'Italic' },
                 'Microsoft YaHei',
@@ -127,6 +127,8 @@ config.font_rules = {
     },
 }
 config.font_size = 12.0
+-- Hack's hhea cell is ~1.16em; 1.08 stretches it to Source Code Pro's ~1.26em.
+config.line_height = 1.08
 
 -- Disable missing glyph warning popup (no more alerts when certain characters lack glyphs)
 config.warn_about_missing_glyphs = false
@@ -275,7 +277,7 @@ config.integrated_title_buttons = { 'Hide', 'Maximize', 'Close' }
 -- Raise font_size here to make the whole bar (and the pills) taller.
 config.window_frame = {
     font = wezterm.font_with_fallback({
-        'Source Code Pro',
+        'Hack',
         'JetBrains Mono',
         'Consolas',
         'Microsoft YaHei',

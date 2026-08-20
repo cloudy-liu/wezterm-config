@@ -6,6 +6,8 @@
 
 ![WezTerm 中的 Ghostty Frappé 主题](./Ghostty.png)
 
+![ghostty-frappe-pill：圆角胶囊标签与 Hack 字体](./Ghostty-pill-hack.png)
+
 ## 核心特性
 
 - 六套暗色主题，拥有不同配色与窗口外观
@@ -20,7 +22,7 @@
 | 主题 | 外观 |
 |---|---|
 | `ghostty-frappe` **（默认）** | 柔和的 Catppuccin Frappé 粉彩配色，紧凑、实色、无缝窗口外观 |
-| `ghostty-frappe-pill` | Frappé 配色 + tmux 风格圆角胶囊标签，激活标签橙色高亮 |
+| `ghostty-frappe-pill` | Frappé 配色 + tmux 风格圆角胶囊标签，主字体 Hack，激活标签橙色高亮 |
 | `ghostty-mocha` | 更深的 Catppuccin Mocha 黑紫配色，实色无缝窗口外观 |
 | `iterm2-solarized-dark` | 低眩光青蓝 Solarized Dark，搭配克制的 Acrylic 模糊 |
 | `luna-night` | 深紫色半透明 Acrylic |
@@ -35,7 +37,7 @@
 - [WezTerm](https://wezfurlong.org/wezterm/) stable ≥ 20240101
 - Python ≥ 3.10
 - Git；也可以下载仓库 ZIP，并在解压目录中运行后续命令
-- 推荐字体：Source Code Pro、JetBrains Mono 和 Microsoft YaHei；缺失字体会自动回退
+- 推荐字体：Source Code Pro、Hack、JetBrains Mono 和 Microsoft YaHei；缺失字体会自动回退
 
 > **Shell 路径：**所有主题会按以下顺序自动解析 Cmder：`WEZTERM_CMDER_INIT` → `CMDER_ROOT` → `where cmder` → 常见安装路径 → 普通 `cmd.exe`。把 Cmder 加入 `PATH`，或设置官方变量 `CMDER_ROOT`，即可启用 Clink/Cmder；都找不到时仍会正常启动普通 `cmd.exe`。若希望改用 PowerShell/WSL，请在安装前修改所选主题中的 `config.default_prog`。
 

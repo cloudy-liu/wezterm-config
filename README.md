@@ -6,6 +6,8 @@ A Windows-focused [WezTerm](https://wezfurlong.org/wezterm/) setup with six inst
 
 ![Ghostty Frappé theme in WezTerm](./Ghostty.png)
 
+![ghostty-frappe-pill: rounded pill tabs and Hack](./Ghostty-pill-hack.png)
+
 ## Highlights
 
 - Six dark themes with distinct palettes and window treatments
@@ -20,7 +22,7 @@ A Windows-focused [WezTerm](https://wezfurlong.org/wezterm/) setup with six inst
 | Theme | Appearance |
 |---|---|
 | `ghostty-frappe` **(default)** | Soft Catppuccin Frappé pastels with compact, seamless opaque chrome |
-| `ghostty-frappe-pill` | Frappé palette with tmux-style rounded pill tabs and an accent-filled active tab |
+| `ghostty-frappe-pill` | Frappé palette with tmux-style rounded pill tabs, Hack as the primary font, and an accent-filled active tab |
 | `ghostty-mocha` | Deeper black-purple Catppuccin Mocha with seamless opaque chrome |
 | `iterm2-solarized-dark` | Low-glare cyan-blue Solarized Dark with restrained Acrylic blur |
 | `luna-night` | Deep-purple translucent Acrylic |
@@ -35,7 +37,7 @@ Requirements:
 - [WezTerm](https://wezfurlong.org/wezterm/) stable ≥ 20240101
 - Python ≥ 3.10
 - Git, or download the repository as a ZIP and run the commands from the extracted directory
-- Recommended fonts: Source Code Pro, JetBrains Mono, and Microsoft YaHei; missing fonts fall back automatically
+- Recommended fonts: Source Code Pro, Hack, JetBrains Mono, and Microsoft YaHei; missing fonts fall back automatically
 
 > **Shell path:** every theme resolves Cmder automatically in this order: `WEZTERM_CMDER_INIT` → `CMDER_ROOT` → `where cmder` → common install paths → plain `cmd.exe`. Put Cmder on `PATH` or set `CMDER_ROOT` (Cmder's official variable) to enable Clink/Cmder; if nothing is found, WezTerm still starts a normal `cmd.exe`. To use PowerShell or WSL instead, edit `config.default_prog` in the selected theme before installing it.
 
