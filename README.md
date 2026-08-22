@@ -2,7 +2,7 @@
 
 [中文](./README_CN.md)
 
-A Windows-focused [WezTerm](https://wezfurlong.org/wezterm/) setup with six installable themes, Cmder/Clink integration, practical pane and tab shortcuts, and reliable CJK font fallback. **Ghostty Frappé is the default theme.**
+A Windows-focused [WezTerm](https://wezfurlong.org/wezterm/) setup with seven installable themes, Cmder/Clink integration, practical pane and tab shortcuts, and reliable CJK font fallback. **Ghostty Frappé is the default theme.**
 
 ![Ghostty Frappé theme in WezTerm](./Ghostty.png)
 
@@ -10,7 +10,7 @@ A Windows-focused [WezTerm](https://wezfurlong.org/wezterm/) setup with six inst
 
 ## Highlights
 
-- Six dark themes with distinct palettes and window treatments
+- Seven dark themes with distinct palettes and window treatments
 - Smart `Ctrl+C`: copy selected text, otherwise send an interrupt
 - Right-click paste and Windows Terminal-style pane shortcuts
 - CRLF-to-LF paste normalization for remote shells and editors
@@ -23,6 +23,7 @@ A Windows-focused [WezTerm](https://wezfurlong.org/wezterm/) setup with six inst
 |---|---|
 | `ghostty-frappe` **(default)** | Soft Catppuccin Frappé pastels with compact, seamless opaque chrome |
 | `ghostty-frappe-pill` | Frappé palette with tmux-style rounded pill tabs, Hack as the primary font, and an accent-filled active tab |
+| `one-dark-pro-pill` | One Dark Pro palette with the same rounded pill tabs and Hack; active tab uses the editor focus blue `#528bff` |
 | `ghostty-mocha` | Deeper black-purple Catppuccin Mocha with seamless opaque chrome |
 | `iterm2-solarized-dark` | Low-glare cyan-blue Solarized Dark with restrained Acrylic blur |
 | `luna-night` | Deep-purple translucent Acrylic |

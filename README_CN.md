@@ -2,7 +2,7 @@
 
 [English](./README.md)
 
-一套面向 Windows 的 [WezTerm](https://wezfurlong.org/wezterm/) 完整配置：包含六套可安装主题、Cmder/Clink 集成、实用的分屏与标签快捷键，以及可靠的中英文字体回退。**默认主题为 Ghostty Frappé。**
+一套面向 Windows 的 [WezTerm](https://wezfurlong.org/wezterm/) 完整配置：包含七套可安装主题、Cmder/Clink 集成、实用的分屏与标签快捷键，以及可靠的中英文字体回退。**默认主题为 Ghostty Frappé。**
 
 ![WezTerm 中的 Ghostty Frappé 主题](./Ghostty.png)
 
@@ -10,7 +10,7 @@
 
 ## 核心特性
 
-- 六套暗色主题，拥有不同配色与窗口外观
+- 七套暗色主题，拥有不同配色与窗口外观
 - 智能 `Ctrl+C`：有选区时复制，无选区时发送中断
 - 右键粘贴，以及对齐 Windows Terminal 的分屏快捷键
 - 粘贴时自动将 CRLF 转为 LF，避免远端终端或编辑器出现空行
@@ -23,6 +23,7 @@
 |---|---|
 | `ghostty-frappe` **（默认）** | 柔和的 Catppuccin Frappé 粉彩配色，紧凑、实色、无缝窗口外观 |
 | `ghostty-frappe-pill` | Frappé 配色 + tmux 风格圆角胶囊标签，主字体 Hack，激活标签橙色高亮 |
+| `one-dark-pro-pill` | One Dark Pro 配色 + 同样的圆角胶囊标签与 Hack；激活标签使用编辑器焦点蓝 `#528bff` |
 | `ghostty-mocha` | 更深的 Catppuccin Mocha 黑紫配色，实色无缝窗口外观 |
 | `iterm2-solarized-dark` | 低眩光青蓝 Solarized Dark，搭配克制的 Acrylic 模糊 |
 | `luna-night` | 深紫色半透明 Acrylic |
