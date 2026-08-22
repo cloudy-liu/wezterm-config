@@ -21,6 +21,7 @@ DEFAULT_THEME = "ghostty-frappe"
 THEME_DESCRIPTIONS = {
     "ghostty-frappe": "Ghostty-inspired Catppuccin Frappe theme (default)",
     "ghostty-frappe-pill": "Ghostty Frappe with rounded pill tabs and Hack",
+    "one-dark-pro-pill": "One Dark Pro with rounded pill tabs and Hack",
     "ghostty-mocha": "Ghostty-inspired Catppuccin Mocha theme",
     "iterm2-solarized-dark": "iTerm2-inspired Solarized Dark theme",
     "tabby-darcula": "Tabby / JetBrains Darcula solid theme",
