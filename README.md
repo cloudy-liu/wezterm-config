@@ -2,15 +2,21 @@
 
 [中文](./README_CN.md)
 
-A Windows-focused [WezTerm](https://wezfurlong.org/wezterm/) setup with seven installable themes, Cmder/Clink integration, practical pane and tab shortcuts, and reliable CJK font fallback. **Ghostty Frappé is the default theme.**
+A Windows-focused [WezTerm](https://wezfurlong.org/wezterm/) setup with eight installable themes, Cmder/Clink integration, practical pane and tab shortcuts, and reliable CJK font fallback. **Ghostty Frappé is the default theme.**
 
-![Ghostty Frappé theme in WezTerm](./Ghostty.png)
+## Previews
 
-![ghostty-frappe-pill: rounded pill tabs and Hack](./Ghostty-pill-hack.png)
+| `ghostty-frappe` **(default)** | `ghostty-frappe-pill` |
+|:---:|:---:|
+| ![Ghostty Frappé](./Ghostty.png) | ![ghostty-frappe-pill](./Ghostty-pill-hack.png) |
+
+| `tabby-darcula-hack-pill` |
+|:---:|
+| ![tabby-darcula-hack-pill](./tabby-darcula-hack-pill.png) |
 
 ## Highlights
 
-- Seven dark themes with distinct palettes and window treatments
+- Eight dark themes with distinct palettes and window treatments
 - Smart `Ctrl+C`: copy selected text, otherwise send an interrupt
 - Right-click paste and Windows Terminal-style pane shortcuts
 - CRLF-to-LF paste normalization for remote shells and editors
@@ -28,6 +34,7 @@ A Windows-focused [WezTerm](https://wezfurlong.org/wezterm/) setup with seven in
 | `iterm2-solarized-dark` | Low-glare cyan-blue Solarized Dark with restrained Acrylic blur |
 | `luna-night` | Deep-purple translucent Acrylic |
 | `tabby-darcula` | Solid Tabby / JetBrains Darcula dark theme |
+| `tabby-darcula-hack-pill` | Darcula palette with tmux-style rounded pill tabs and Hack; active tab uses the scheme blue `#4581EB` |
 
 > The `ghostty-*` and `iterm2-*` names describe palette and appearance inspiration. All themes run in WezTerm; they are not those applications or their macOS default themes.
 

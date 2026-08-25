@@ -25,6 +25,7 @@ THEME_DESCRIPTIONS = {
     "ghostty-mocha": "Ghostty-inspired Catppuccin Mocha theme",
     "iterm2-solarized-dark": "iTerm2-inspired Solarized Dark theme",
     "tabby-darcula": "Tabby / JetBrains Darcula solid theme",
+    "tabby-darcula-hack-pill": "Darcula with rounded pill tabs and Hack",
     "luna-night": "Luna-Night purple Acrylic theme",
 }
 
