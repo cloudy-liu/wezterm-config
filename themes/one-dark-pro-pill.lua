@@ -143,6 +143,11 @@ config.warn_about_missing_glyphs = false
 -- ============================================================================
 config.canonicalize_pasted_newlines = "LineFeed"
 
+-- Honor Kitty keyboard protocol when an app requests enhanced key encoding
+-- (e.g. Neovim distinguishing Ctrl+I from Tab). Default is false.
+-- Ref: https://wezterm.org/config/lua/config/enable_kitty_keyboard.html
+config.enable_kitty_keyboard = true
+
 -- Window close confirmation: WezTerm doesn't support "prompt once then remember".
 -- Note: window_close_confirmation only affects closing via the window system (clicking X, etc.),
 -- not closing individual tabs/panes.
