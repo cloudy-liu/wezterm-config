@@ -195,7 +195,7 @@ config.color_scheme = 'Tabby-JetBrains-Darcula'
 -- are invisible; the visible capsule is drawn by format-tab-title from Nerd
 -- Font half-circle glyphs. The fancy bar assigns each tab an equal share of
 -- the bar width and hard-clips overflow, so the formatter below budgets the
--- pill width itself from tracked window geometry — capsules shrink with an
+-- pill width itself from live pane geometry — capsules shrink with an
 -- ellipsis as tabs multiply, and the caps/(x) are never clipped.
 -- ============================================================================
 
@@ -458,27 +458,42 @@ local pill = {
     hover_tab_fg = '#FA54FF',
 }
 
--- The fancy bar assigns each tab an equal share of the bar width and clips
--- overflow without telling Lua. Track window geometry so the pill formatter
--- can budget widths itself. Cell width comes from the active tab's full
--- grid (pixel_width / cols), so pane splits cannot skew it: pill widths only
--- change on window resize or tab count change, never on tab switching.
-wezterm.on('update-status', function(window, _pane)
-    local ok, dims, size = pcall(function()
-        return window:get_dimensions(), window:active_tab():get_size()
-    end)
-    if ok and dims and dims.pixel_width
-        and size and size.cols and size.cols > 0
-        and size.pixel_width and size.pixel_width > 0 then
-        wezterm.GLOBAL.bar_pixel_width = dims.pixel_width
-        wezterm.GLOBAL.cell_pixel_width = size.pixel_width / size.cols
-    end
-end)
+local PILL_CHROME_CELLS = 5
+local TAB_LAYOUT_OVERHEAD_CELLS = 10
+local RESERVED_BAR_PIXELS = 240
+local MIN_TITLE_CELLS = 2
 
-wezterm.on('format-tab-title', function(tab, tabs, _panes, _cfg, hover, max_width)
-    -- Prefer tab_title set via set_title(); fall back to pane title
-    local title = (tab.tab_title and #tab.tab_title > 0) and tab.tab_title or (tab.active_pane.title or '')
-    title = strip_windows_admin_prefix(title)
+local function title_for_tab(tab_info)
+    -- Prefer tab_title set via set_title(); fall back to pane title.
+    local title = (tab_info.tab_title and #tab_info.tab_title > 0)
+        and tab_info.tab_title
+        or (tab_info.active_pane.title or '')
+    return strip_windows_admin_prefix(title)
+end
+
+local function current_tab_bar_geometry(panes)
+    -- Read the callback's PaneInformation geometry directly. It is updated before
+    -- format-tab-title runs during a resize, unlike the former async
+    -- update-status cache, which could retain a narrow pre-maximize width.
+    local cell_px
+    local full_width_cells = 0
+    for _, pane_info in ipairs(panes) do
+        if not cell_px and pane_info.width and pane_info.width > 0
+            and pane_info.pixel_width and pane_info.pixel_width > 0 then
+            cell_px = pane_info.pixel_width / pane_info.width
+        end
+        full_width_cells = math.max(
+            full_width_cells,
+            (pane_info.left or 0) + (pane_info.width or 0)
+        )
+    end
+    if cell_px and full_width_cells > 0 then
+        return full_width_cells * cell_px, cell_px
+    end
+end
+
+wezterm.on('format-tab-title', function(tab, tabs, panes, cfg, hover, max_width)
+    local title = title_for_tab(tab)
 
     local tab_bg, tab_fg = pill.tab_bg, pill.tab_fg
     if tab.is_active then
@@ -487,20 +502,26 @@ wezterm.on('format-tab-title', function(tab, tabs, _panes, _cfg, hover, max_widt
         tab_bg, tab_fg = pill.hover_tab_bg, pill.hover_tab_fg
     end
 
-    -- Title budget: static ceiling from tab_max_width (5 cells of capsule
-    -- chrome), then shrink to the estimated per-tab share of the bar:
-    --   share = (bar - reserved caption/new-tab chrome) / num_tabs
-    --   overhead = 5 capsule chrome + ~4 button padding & close (x) + 1 safety
-    local avail = math.max(1, max_width - 5)
-    local bar_px = wezterm.GLOBAL.bar_pixel_width
-    local cell_px = wezterm.GLOBAL.cell_pixel_width
+    -- Start with the configured per-pill ceiling. `format-tab-title` is called
+    -- twice, and the second pass may receive the first pass's rendered length,
+    -- so use the stable config value instead of repeatedly shrinking max_width.
+    local pill_width_ceiling = (cfg and cfg.tab_max_width) or max_width
+    local max_title_width = math.max(1, pill_width_ceiling - PILL_CHROME_CELLS)
+
+    local bar_px, cell_px = current_tab_bar_geometry(panes)
     local num_tabs = #tabs
     if bar_px and cell_px and cell_px > 0 and num_tabs > 0 then
-        local share_cells = math.floor((bar_px - 240) / (num_tabs * cell_px))
-        avail = math.max(2, math.min(avail, share_cells - 10))
+        local share_cells = math.floor(
+            math.max(0, bar_px - RESERVED_BAR_PIXELS) / (num_tabs * cell_px)
+        )
+        max_title_width = math.max(
+            MIN_TITLE_CELLS,
+            math.min(max_title_width, share_cells - TAB_LAYOUT_OVERHEAD_CELLS)
+        )
     end
-    if wezterm.column_width(title) > avail then
-        title = wezterm.truncate_right(title, math.max(0, avail - 1)) .. '…'
+
+    if wezterm.column_width(title) > max_title_width then
+        title = wezterm.truncate_right(title, math.max(0, max_title_width - 1)) .. '…'
     end
 
     local items = {
