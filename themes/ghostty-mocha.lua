@@ -342,8 +342,6 @@ local function rename_tab_action()
 end
 
 config.keys = {
-    -- Rename current tab (Ctrl+B)
-    { key = 'b', mods = 'CTRL', action = rename_tab_action() },
     -- Rename current tab (Ctrl+Shift+R)
     { key = 'r', mods = 'CTRL|SHIFT', action = rename_tab_action() },
     -- Debug overlay (don't use default Ctrl+Shift+L: it's typically for Launcher/domain selection)
