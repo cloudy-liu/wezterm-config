@@ -89,7 +89,7 @@ python install_theme.py install ghostty-frappe --mode link
 | `Alt+Shift+←/→/↑/↓` | 调整当前分屏大小 |
 | `` Alt+` `` / `` Alt+Shift+` `` | 轮询下一个 / 上一个分屏 |
 | `Ctrl+Shift+W` | 关闭当前分屏 |
-| `Ctrl+B` / `Ctrl+Shift+R` | 重命名当前标签 |
+| `Ctrl+Shift+R` | 重命名当前标签 |
 | `Ctrl+Shift+←/→` | 左移 / 右移当前标签 |
 | `Ctrl+Shift+T` | 新建标签 |
 

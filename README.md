@@ -89,7 +89,7 @@ python install_theme.py install ghostty-frappe --mode link
 | `Alt+Shift+←/→/↑/↓` | Resize the current pane |
 | `` Alt+` `` / `` Alt+Shift+` `` | Cycle to the next / previous pane |
 | `Ctrl+Shift+W` | Close the current pane |
-| `Ctrl+B` / `Ctrl+Shift+R` | Rename the current tab |
+| `Ctrl+Shift+R` | Rename the current tab |
 | `Ctrl+Shift+←/→` | Move the current tab left / right |
 | `Ctrl+Shift+T` | Open a new tab |
 
