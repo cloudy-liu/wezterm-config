@@ -425,11 +425,11 @@ config.keys = {
     { key = '+', mods = 'ALT|SHIFT', action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }) },
     { key = '_', mods = 'ALT|SHIFT', action = act.SplitVertical({ domain = 'CurrentPaneDomain' }) },
 
-    -- ── Pane navigation (aligned with Windows Terminal) ──
-    { key = 'LeftArrow',  mods = 'ALT', action = act.ActivatePaneDirection('Left') },
-    { key = 'RightArrow', mods = 'ALT', action = act.ActivatePaneDirection('Right') },
-    { key = 'UpArrow',    mods = 'ALT', action = act.ActivatePaneDirection('Up') },
-    { key = 'DownArrow',  mods = 'ALT', action = act.ActivatePaneDirection('Down') },
+    -- ── Pane navigation (keep Alt+Arrow available to terminal applications) ──
+    { key = 'LeftArrow',  mods = 'CTRL|ALT', action = act.ActivatePaneDirection('Left') },
+    { key = 'RightArrow', mods = 'CTRL|ALT', action = act.ActivatePaneDirection('Right') },
+    { key = 'UpArrow',    mods = 'CTRL|ALT', action = act.ActivatePaneDirection('Up') },
+    { key = 'DownArrow',  mods = 'CTRL|ALT', action = act.ActivatePaneDirection('Down') },
 
     -- ── Pane cycle (Alt+Tab-like): keep pressing to rotate focus ──
     -- Alt+` mirrors Windows "cycle windows of same app"; wraps around.

@@ -18,7 +18,7 @@ A Windows-focused [WezTerm](https://wezfurlong.org/wezterm/) setup with eight in
 
 - Eight dark themes with distinct palettes and window treatments
 - Smart `Ctrl+C`: copy selected text, otherwise send an interrupt
-- Right-click paste and Windows Terminal-style pane shortcuts
+- Right-click paste and shortcuts for pane splitting, navigation, and resizing
 - CRLF-to-LF paste normalization for remote shells and editors
 - CJK, Latin, and symbol font fallback
 - Borderless tab bar with integrated Windows caption buttons
@@ -85,13 +85,15 @@ python install_theme.py install ghostty-frappe --mode link
 | `Ctrl+V` / right-click | Paste from the clipboard |
 | `Ctrl` + left-click | Open a hyperlink |
 | `Alt+Shift++` / `Alt+Shift+_` | Split the current pane horizontally / vertically |
-| `Alt+←/→/↑/↓` | Navigate between panes |
+| `Ctrl+Alt+←/→/↑/↓` | Navigate between panes |
 | `Alt+Shift+←/→/↑/↓` | Resize the current pane |
 | `` Alt+` `` / `` Alt+Shift+` `` | Cycle to the next / previous pane |
 | `Ctrl+Shift+W` | Close the current pane |
 | `Ctrl+Shift+R` | Rename the current tab |
 | `Ctrl+Shift+←/→` | Move the current tab left / right |
 | `Ctrl+Shift+T` | Open a new tab |
+
+`Alt+Arrow` is available to terminal applications, including Codex's `Alt+Up` shortcut for answering queued follow-up questions.
 
 ## Customize
 
