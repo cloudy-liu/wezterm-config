@@ -18,7 +18,7 @@
 
 - 八套暗色主题，拥有不同配色与窗口外观
 - 智能 `Ctrl+C`：有选区时复制，无选区时发送中断
-- 右键粘贴，以及对齐 Windows Terminal 的分屏快捷键
+- 右键粘贴，以及创建、切换和调整分屏大小的快捷键
 - 粘贴时自动将 CRLF 转为 LF，避免远端终端或编辑器出现空行
 - 中英文与符号字体回退
 - 无边框标签栏，集成 Windows 窗口控制按钮
@@ -85,13 +85,15 @@ python install_theme.py install ghostty-frappe --mode link
 | `Ctrl+V` / 右键 | 粘贴剪贴板内容 |
 | `Ctrl` + 左键 | 打开链接 |
 | `Alt+Shift++` / `Alt+Shift+_` | 水平 / 垂直分屏 |
-| `Alt+←/→/↑/↓` | 在分屏间切换 |
+| `Ctrl+Alt+←/→/↑/↓` | 在分屏间切换 |
 | `Alt+Shift+←/→/↑/↓` | 调整当前分屏大小 |
 | `` Alt+` `` / `` Alt+Shift+` `` | 轮询下一个 / 上一个分屏 |
 | `Ctrl+Shift+W` | 关闭当前分屏 |
 | `Ctrl+Shift+R` | 重命名当前标签 |
 | `Ctrl+Shift+←/→` | 左移 / 右移当前标签 |
 | `Ctrl+Shift+T` | 新建标签 |
+
+`Alt+方向键` 留给终端内的应用使用，例如 Codex 用 `Alt+↑` 回答待处理的追问。
 
 ## 自定义
 
